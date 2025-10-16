@@ -13,7 +13,7 @@
 
 ## 📜 Aturan Validasi dan Alur Kerja
 
-Berikut adalah rincian aturan validasi yang diterapkan pada formulir, sesuai dengan fungsionalitas kode yang ada.
+Berikut adalah rincian aturan validasi yang diterapkan pada Halaman Registrasi
 
 ### Validasi Frontend (JavaScript) 🖥️
 
