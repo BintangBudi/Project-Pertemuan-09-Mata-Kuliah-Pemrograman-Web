@@ -3,8 +3,8 @@
 
 ### Proyek Kloning Halaman Registrasi Facebook
 #### Nama Anggota Kelompok :
-* ** Bintang Budi Pangestu (D1041221046)**
-* ** Dwiki Pratika Admaja (D1041221014)**
+* Bintang Budi Pangestu (D1041221046)
+* Dwiki Pratika Admaja (D1041221014)
 
 -   **Frontend**: Dikerjakan menggunakan **HTML, CSS, dan JavaScript** untuk membangun antarmuka pengguna (UI) yang mirip dengan aslinya.
 -   **Backend**: Dikerjakan menggunakan **PHP** untuk memproses data formulir, melakukan validasi, dan menyimpannya ke database.
