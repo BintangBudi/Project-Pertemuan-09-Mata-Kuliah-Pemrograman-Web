@@ -1,43 +1,52 @@
+
 # Project-Pertemuan-09-Mata-Kuliah-Pemrograman-Web
-Tugas Project Project Pertemuan 09 Mata Kuliah Pemrograman Web
 
-# Proyek Kloning Halaman Registrasi Facebook
-
-Proyek ini adalah rekreasi fungsional dari halaman registrasi Facebook. Tujuannya adalah untuk mempraktikkan pengembangan web full-stack dengan memisahkan tugas frontend dan backend.
+### Proyek Kloning Halaman Registrasi Facebook
+#### Nama Anggota Kelompok :
+* ** Bintang Budi Pangestu (D1041221046)**
+* ** Dwiki Pratika Admaja (D1041221014)**
 
 -   **Frontend**: Dikerjakan menggunakan **HTML, CSS, dan JavaScript** untuk membangun antarmuka pengguna (UI) yang mirip dengan aslinya.
 -   **Backend**: Dikerjakan menggunakan **PHP** untuk memproses data formulir, melakukan validasi, dan menyimpannya ke database.
 
-## 🗂️ Struktur File
+---
 
-```
-.
-├── index.html       // File utama untuk struktur halaman (Frontend)
-├── style.css        // File untuk styling halaman (Frontend)
-├── script.js        // File untuk fungsionalitas di sisi klien (Frontend)
-└── register.php     // File untuk memproses data di sisi server (Backend)
-```
+## 📜 Aturan Validasi dan Alur Kerja
+
+Berikut adalah rincian aturan validasi yang diterapkan pada formulir, sesuai dengan fungsionalitas kode yang ada.
+
+### Validasi Frontend (JavaScript) 🖥️
+
+Validasi ini terjadi langsung di browser pengguna untuk memberikan feedback secara cepat. Kode ini berfokus pada dua hal:
+
+* **Input Wajib Diisi**: Semua kolom yang memiliki atribut `required` di HTML akan diperiksa. Jika ada yang kosong saat tombol "Sign Up" ditekan, `border` kolom tersebut akan berubah menjadi **merah** dan sebuah `alert` akan muncul.
+* **Panjang Password**: Password yang dimasukkan harus memiliki panjang **minimal 6 karakter**. Jika kurang, sebuah `alert` akan memperingatkan pengguna dan `border` kolom password akan menjadi merah.
 
 ---
 
-## 🚀 Tugas Backend Developer
+### Pemrosesan Backend (PHP) 🛡️
 
-Tugas Anda adalah membuat bagian backend berfungsi. Frontend sudah dibuat dan akan mengirimkan data formulir ke file `register.php` menggunakan metode `POST`. Anda perlu menyiapkan server, database, dan skrip PHP untuk menangani data tersebut.
+Backend tidak melakukan validasi data secara eksplisit (seperti mengecek `if empty()`), melainkan langsung mencoba memasukkan data ke database. Penanganan error terjadi berdasarkan hasil dari proses tersebut.
 
-### Langkah 1: Siapkan Lingkungan Pengembangan Lokal
+* **Keamanan Password**: Sebelum disimpan ke database, password pengguna akan diubah menjadi kode acak (di-hash) menggunakan fungsi `password_hash()`. Ini adalah langkah keamanan krusial agar password asli tidak tersimpan.
+* **Pencegahan SQL Injection**: Kode menggunakan *Prepared Statements* (`prepare()` dan `bind_param()`) untuk memasukkan data. Ini adalah praktik terbaik untuk mencegah peretasan melalui metode SQL Injection.
+* **Penanganan Email/Ponsel Duplikat**: Validasi untuk email atau nomor ponsel yang sudah terdaftar tidak diperiksa di awal. Sebaliknya, kode mencoba menyimpan data dan akan **menangkap error** dari database jika gagal. Jika kode error adalah `1062` (data duplikat), barulah sistem menampilkan pesan bahwa email/ponsel sudah terdaftar.
 
-Anda memerlukan server lokal untuk menjalankan PHP dan database. Pilihan paling umum adalah **XAMPP** atau **WAMP**.
+---
 
-1.  **Unduh dan instal XAMPP** dari [situs resminya](https://www.apachefriends.org/index.html).
-2.  Jalankan XAMPP Control Panel dan **nyalakan (Start) modul Apache dan MySQL**.
-    ![XAMPP Control Panel](https://i.imgur.com/KplA35G.png)
+### Alur Setelah Submit ➡️
 
-### Langkah 2: Buat Database dan Tabel
+1.  Saat pengguna menekan "Sign Up", **JavaScript** akan melakukan validasi pertama (mengecek input kosong dan panjang password). Jika gagal, proses berhenti dan pengguna diberi tahu melalui `alert`.
+2.  Jika validasi JavaScript lolos, data formulir dikirim ke server (**`register.php`**).
+3.  **PHP** langsung mencoba menyimpan data ke database.
+4.  Jika terjadi error karena **email/ponsel sudah ada**, halaman akan menampilkan pesan error spesifik mengenai data duplikat.
+5.  Jika data berhasil disimpan tanpa error, pengguna akan melihat **halaman baru** dengan pesan "Registrasi Berhasil!".
 
-Backend akan menyimpan data pendaftaran pengguna ke dalam database MySQL.
+## ✅ Cara Menjalankan Proyek Secara Keseluruhan
 
-1.  Buka browser dan akses `http://localhost/phpmyadmin/`.
-2.  Buat database baru. Klik **New** di sidebar kiri, beri nama database `facebook_clone`, dan klik **Create**.
+1.  Pastikan **Apache** dan **MySQL** berjalan di XAMPP.
+2.  Buka browser dan akses `http://localhost/phpmyadmin/`.
+3.  Buat database baru. Klik **New** di sidebar kiri, beri nama database `facebook_clone`, dan klik **Create**.
 3.  Setelah database dibuat, klik tab **SQL** dan jalankan query berikut untuk membuat tabel `users`:
 
     ```sql
@@ -56,70 +65,9 @@ Backend akan menyimpan data pendaftaran pengguna ke dalam database MySQL.
     ```
 
     Tabel ini akan menyimpan semua informasi yang dikirim dari formulir. Perhatikan bahwa `password` akan disimpan sebagai `varchar(255)` karena kita akan **meng-hash password** sebelum menyimpannya.
-
-### Langkah 3: Modifikasi `register.php` untuk Terhubung ke Database
-
-File `register.php` yang sudah ada berisi logika dasar untuk menerima data. Tugas Anda adalah mengaktifkan bagian koneksi database di dalamnya.
-
-1.  **Buka file `register.php`**.
-2.  Cari bagian yang ditandai sebagai `// --- Simulasi Penyimpanan ke Database ---`.
-3.  **Hapus komentar** pada kode koneksi database dan **sesuaikan kredensialnya** jika perlu (biasanya, username default XAMPP adalah `root` tanpa password).
-4.  Pastikan logika untuk **menghash password** menggunakan `password_hash()` sudah aktif. Ini sangat penting untuk keamanan!
-
-    **Contoh Kode yang Perlu Diaktifkan di `register.php`:**
-    ```php
-    // Ganti bagian kode yang hanya menampilkan data
-    // dengan kode koneksi dan penyimpanan database berikut:
-    
-    $servername = "localhost";
-    $username = "root";
-    $password_db = ""; // Kosongkan jika tidak ada password
-    $dbname = "facebook_clone";
-
-    // Buat koneksi
-    $conn = new mysqli($servername, $username, $password_db, $dbname);
-
-    // Cek koneksi
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    // Hash password sebelum disimpan untuk keamanan
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-    
-    // Siapkan statement untuk mencegah SQL Injection
-    $stmt = $conn->prepare("INSERT INTO users (firstname, lastname, email_or_mobile, password, dob, gender) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssss", $firstname, $lastname, $email_or_mobile, $hashed_password, $dob, $gender);
-
-    if ($stmt->execute()) {
-        echo "<h1>Registrasi Berhasil!</h1>";
-        echo "<h2>Selamat datang, " . htmlspecialchars($firstname) . "! Akun Anda telah dibuat.</h2>";
-    } else {
-        // Cek jika error karena email/nomor hp duplikat (Error code 1062)
-        if ($conn->errno == 1062) {
-            echo "<h1>Error!</h1>";
-            echo "<p>Email atau nomor seluler ini sudah terdaftar. Silakan gunakan yang lain.</p>";
-            echo "<a href='index.html'>Kembali ke pendaftaran</a>";
-        } else {
-            echo "Error: " . $stmt->error;
-        }
-    }
-
-    $stmt->close();
-    $conn->close();
-    ```
-    > **Catatan Keamanan:** Menggunakan `prepared statements` (`prepare` dan `bind_param`) sangat penting untuk mencegah serangan SQL Injection.
-
----
-
-## ✅ Cara Menjalankan Proyek Secara Keseluruhan
-
-1.  Pastikan **Apache** dan **MySQL** berjalan di XAMPP.
-2.  Salin semua file proyek (`index.html`, `style.css`, `script.js`, `register.php`) ke dalam folder `htdocs` di direktori instalasi XAMPP Anda.
+4.  Salin semua file proyek (`index.html`, `style.css`, `script.js`, `register.php`) ke dalam folder `htdocs` di direktori instalasi XAMPP.
     -   Contoh lokasi di Windows: `C:\xampp\htdocs\nama-folder-proyek\`
-3.  Buka browser Anda dan akses URL: `http://localhost/nama-folder-proyek/`
-4.  Halaman registrasi akan muncul. Coba isi formulir dan klik "Sign Up".
-5.  Jika berhasil, Anda akan melihat pesan sukses. Jika gagal, pesan error akan ditampilkan.
-6.  Periksa tabel `users` di **phpMyAdmin** untuk memastikan data baru telah tersimpan dengan benar (dan password sudah di-hash!).
-
-Jika ada pertanyaan, jangan ragu untuk bertanya! Selamat mengerjakan! 👍
+5.  Buka browser Anda dan akses URL: `http://localhost/nama-folder-proyek/`
+6.  Halaman registrasi akan muncul. Coba isi formulir dan klik "Sign Up".
+7.  Jika berhasil, Anda akan melihat pesan sukses. Jika gagal, pesan error akan ditampilkan.
+8.  Periksa tabel `users` di **phpMyAdmin** untuk memastikan data baru telah tersimpan dengan benar (dan password sudah di-hash!).
