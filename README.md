@@ -67,7 +67,7 @@ Backend tidak melakukan validasi data secara eksplisit (seperti mengecek `if emp
     Tabel ini akan menyimpan semua informasi yang dikirim dari formulir. Perhatikan bahwa `password` akan disimpan sebagai `varchar(255)` karena kita akan **meng-hash password** sebelum menyimpannya.
 4.  Salin semua file proyek (`index.html`, `style.css`, `script.js`, `register.php`) ke dalam folder `htdocs` di direktori instalasi XAMPP.
     -   Contoh lokasi di Windows: `C:\xampp\htdocs\nama-folder-proyek\`
-5.  Buka browser Anda dan akses URL: `http://localhost/nama-folder-proyek/`
+5.  Buka browser dan akses URL: `http://localhost/nama-folder-proyek/`
 6.  Halaman registrasi akan muncul. Coba isi formulir dan klik "Sign Up".
 7.  Jika berhasil, Anda akan melihat pesan sukses. Jika gagal, pesan error akan ditampilkan.
 8.  Periksa tabel `users` di **phpMyAdmin** untuk memastikan data baru telah tersimpan dengan benar (dan password sudah di-hash!).
